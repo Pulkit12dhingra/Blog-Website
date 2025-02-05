@@ -40,7 +40,7 @@ def clean_html(html_path):
             <h1 class="mb-0">Pulkit's Blog Website</h1>
             <!-- Right-aligned paragraph -->
             <p class="mb-0">
-             Please review my <a href="http://127.0.0.1:5000/#">Blog Website</a> for more such articles
+             Please review my <a href="https://pulkit-blog-website.onrender.com/#">Blog Website</a> for more such articles
              <br>
              Know more about me at: <a href="https://pulkit12dhingra.github.io/portfolio/" target="_blank">Portfolio</a> | <a href="https://pulkit12dhingra.github.io/portfolio/" target="_blank">LinkedIn</a>
               <br>
