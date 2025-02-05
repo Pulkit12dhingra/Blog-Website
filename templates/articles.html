@@ -1,0 +1,15 @@
+<head>
+</head>
+<body>
+<h2>Articles</h2>
+
+{% for title, summary, tag, contributor in articles %}
+    <a href="{{ url_for('display_article', article_title=title) }}" class="article-link", target="_blank">
+        <div class="article-box">
+            <h3>{{ title }} <span class="contributor">- {{ contributor }}</span></h3> </a>
+            <p><strong>Tag:</strong> {{ tag }}</p>
+            <p>{{ summary }}</p>
+        </div>
+    
+{% endfor %}
+</body>

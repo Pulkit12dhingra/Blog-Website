@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playlist</title>
+
+    <script>
+        let originalOrder = []; // To store original order of articles
+
+        document.addEventListener("DOMContentLoaded", function () {
+            // Store original order of articles
+            let articlesContainer = document.getElementById("articles-container");
+            originalOrder = Array.from(articlesContainer.children);
+        });
+
+        function sortArticles(tag) {
+            let articlesContainer = document.getElementById("articles-container");
+            let articles = Array.from(articlesContainer.children);
+
+            // Sort articles: Move matching ones to the top
+            articles.sort((a, b) => {
+                let tagA = a.getAttribute("data-tag").trim().toLowerCase();
+                let tagB = b.getAttribute("data-tag").trim().toLowerCase();
+
+                if (tagA === tag.trim().toLowerCase()) return -1; // Move up
+                if (tagB === tag.trim().toLowerCase()) return 1;  // Move down
+                return 0; // Keep the same order for others
+            });
+
+            // Apply sorted order
+            articles.forEach(article => articlesContainer.appendChild(article));
+
+            // Show Reset Sorting button
+            document.getElementById("reset-sorting").style.display = "block";
+        }
+
+        function resetSorting() {
+            let articlesContainer = document.getElementById("articles-container");
+
+            // Restore the original order
+            originalOrder.forEach(article => articlesContainer.appendChild(article));
+
+            // Hide Reset Sorting button
+            document.getElementById("reset-sorting").style.display = "none";
+        }
+    </script>
+</head>
+<body>
+
+    <!-- Playlist Tags -->
+    <div class="playlist-container">
+        <div class="box" onclick="sortArticles('Test')">
+            <h1>Test</h1>
+            <p>Get all the sample code here in this Playlist</p>
+        </div>
+        <div class="box" onclick="sortArticles('News')">
+            <h1>News</h1>
+            <p>This is a sample tag</p>
+        </div>
+    </div>
+    <br>
+    <!-- Reset Sorting Button -->
+    <button id="reset-sorting" onclick="resetSorting()" style="display:none;">Reset Sorting</button>
+
+    <!-- Articles Section (Initially All Articles are Visible) -->
+    <div id="articles-container" class="articles-container">
+        {% for title, summary, tag, contributor in articles %}
+            <div class="article-box" data-tag="{{ tag.strip().lower() }}">
+                <h3><a href="/article/{{ title }}" target="_blank">{{ title }}</a> 
+                <span style="color:gray">- {{ contributor }}</span></h3>
+                <p><strong>Tag:</strong> {{ tag }}</p>
+                <p>{{ summary }}</p>
+            </div>
+        {% endfor %}
+    </div>
+
+</body>
+</html>

@@ -1,2 +1,1 @@
-# Blog-Website
-This is my blog website
+# This repo saves the code for my blog website
